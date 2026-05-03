@@ -67,9 +67,6 @@ function setText(id, value) {
 async function initHome() {
   const data = await fetchJson("/api/market-overview");
   const stock = data.primary_signal;
-  const linked = data.themes[0].leaderStock
-    ? data.themes[0].leaderStock.theme
-    : "机器人";
 
   document.getElementById("indices").innerHTML = data.indices.map((item) => `
     <div class="card index-card">
@@ -134,19 +131,19 @@ async function initHome() {
   `).join("");
 
   document.getElementById("acceptance-metrics").innerHTML = `
-    <div class="metric"><div class="muted">触发信号</div><strong>8</strong></div>
-    <div class="metric"><div class="muted">成功预测</div><strong>5</strong></div>
-    <div class="metric"><div class="muted">辅助命中率</div><strong>62.5%</strong></div>
-    <div class="metric"><div class="muted">平均收益</div><strong>+2.68%</strong></div>
+    <div class="metric"><div class="muted">冻结批次</div><strong>09:25</strong></div>
+    <div class="metric"><div class="muted">主池状态</div><strong>待创建</strong></div>
+    <div class="metric"><div class="muted">首日回填</div><strong>待 15:00</strong></div>
+    <div class="metric"><div class="muted">最终结算</div><strong>待 05-11</strong></div>
   `;
 
   document.getElementById("acceptance-checklist").innerHTML = `
-    <div>信号生成 已完成 09:15</div>
-    <div>模型打分 已完成 09:16</div>
-    <div>组合构建 已完成 09:17</div>
-    <div>交易执行 进行中</div>
-    <div>盘中跟踪 进行中</div>
-    <div>收盘统计 将开始 15:05</div>
+    <div>09:15 生成候选池快照</div>
+    <div>09:16 完成情绪与相似度打分</div>
+    <div>09:25 冻结主验收池并写入审计日志</div>
+    <div>15:00 追加首日路径观测 outcome</div>
+    <div>2026-05-07 15:00 追加 T+1 中间结果</div>
+    <div>2026-05-11 15:00 追加 T+3 最终结算</div>
   `;
 
   renderLine(document.getElementById("hero-chart"), stockSeries(96), "#38BDF8");
@@ -162,7 +159,7 @@ async function initAnalysis() {
   setText("analysis-sector", `${stock.sector} / ${stock.concepts.join(" / ")}`);
   setText("analysis-probability", percent(stock.probability.p_hit_3d_5pct));
   setText("analysis-label", data.primary_label);
-  setText("analysis-window", "T+1 开盘建仓 → T+3 收盘结算");
+  setText("analysis-window", "收益窗口：T+1 开盘建仓 → T+3 收盘结算");
   setText("analysis-note", data.acceptance_note);
   setText("analysis-meta", `样本量 ${stock.probability.sample_size} · 校准 ${stock.probability.calibration_version} · ${stock.probability.label}`);
 
