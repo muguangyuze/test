@@ -18,16 +18,17 @@ await new Promise((resolve) => {
 });
 
 test("market overview exposes corrected primary label", async () => {
-  const response = await fetch("http://127.0.0.1:3101/api/market-overview");
+  const response = await fetch("http://127.0.0.1:3101/api/v1/market-overview");
   assert.equal(response.status, 200);
   const payload = await response.json();
   assert.equal(payload.primary_label, "未来 3 个交易日达到 +5% 收益目标的历史条件概率");
+  assert.equal(payload.observation_day_label, "2026-05-06 为实验性 MVP 首个样本外观测日");
   assert.ok(payload.primary_signal.probability.sample_size > 0);
   assert.ok(Object.hasOwn(payload.primary_signal.probability, "model_version"));
 });
 
 test("stock detail keeps P_close_up_today out of main label", async () => {
-  const response = await fetch("http://127.0.0.1:3101/api/stocks/300308");
+  const response = await fetch("http://127.0.0.1:3101/api/v1/stocks/300308");
   assert.equal(response.status, 200);
   const payload = await response.json();
   assert.equal(payload.primary_label, "未来 3 个交易日达到 +5% 收益目标的历史条件概率");
@@ -35,15 +36,23 @@ test("stock detail keeps P_close_up_today out of main label", async () => {
   assert.ok(payload.item.probability.p_close_up_today >= 0.05);
 });
 
+test("health aliases expose primary label context", async () => {
+  const response = await fetch("http://127.0.0.1:3101/api/v1/health/live");
+  assert.equal(response.status, 200);
+  const payload = await response.json();
+  assert.equal(payload.ok, true);
+  assert.equal(payload.primary_label, "未来 3 个交易日达到 +5% 收益目标的历史条件概率");
+});
+
 test("freeze endpoint is append-only", async () => {
-  const first = await fetch("http://127.0.0.1:3101/api/validation/freeze?tradeDate=2026-05-06", {
+  const first = await fetch("http://127.0.0.1:3101/api/v1/validation/freeze?tradeDate=2026-05-06", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ frozen_at: "2026-05-06T09:25:00+08:00" })
   });
   assert.equal(first.status, 201);
 
-  const second = await fetch("http://127.0.0.1:3101/api/validation/freeze?tradeDate=2026-05-06", {
+  const second = await fetch("http://127.0.0.1:3101/api/v1/validation/freeze?tradeDate=2026-05-06", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ frozen_at: "2026-05-06T09:26:00+08:00" })
