@@ -74,31 +74,37 @@ function datasetPayload() {
   };
 }
 
+function matchesPath(pathname, ...candidates) {
+  return candidates.includes(pathname);
+}
+
 const server = http.createServer(async (request, response) => {
   const url = new URL(request.url, "http://127.0.0.1");
   const dataset = datasetPayload();
 
-  if (url.pathname === "/healthz") {
+  if (matchesPath(url.pathname, "/healthz", "/api/v1/health/live", "/api/v1/health/ready")) {
     sendJson(response, 200, {
       ok: true,
       runtime: "node-http",
-      snapshot_time: dataset.snapshotTime
-    });
-    return;
-  }
-
-  if (url.pathname === "/api/market-overview") {
-    sendJson(response, 200, {
-      indices: dataset.indices,
-      themes: dataset.themes,
-      primary_signal: dataset.featuredSignal,
-      disclaimer: dataset.disclaimer,
+      snapshot_time: dataset.snapshotTime,
       primary_label: dataset.primary_label
     });
     return;
   }
 
-  if (url.pathname === "/api/stocks") {
+  if (matchesPath(url.pathname, "/api/market-overview", "/api/v1/market-overview")) {
+    sendJson(response, 200, {
+      indices: dataset.indices,
+      themes: dataset.themes,
+      primary_signal: dataset.featuredSignal,
+      disclaimer: dataset.disclaimer,
+      primary_label: dataset.primary_label,
+      observation_day_label: dataset.observation_day_label
+    });
+    return;
+  }
+
+  if (matchesPath(url.pathname, "/api/stocks", "/api/v1/stocks")) {
     sendJson(response, 200, {
       items: dataset.rankedSignals,
       primary_label: dataset.primary_label
@@ -106,7 +112,7 @@ const server = http.createServer(async (request, response) => {
     return;
   }
 
-  if (url.pathname.startsWith("/api/stocks/")) {
+  if (url.pathname.startsWith("/api/stocks/") || url.pathname.startsWith("/api/v1/stocks/")) {
     const code = url.pathname.split("/").pop();
     const stock = dataset.stocks.find((item) => item.code === code);
     if (!stock) {
@@ -121,7 +127,7 @@ const server = http.createServer(async (request, response) => {
     return;
   }
 
-  if (url.pathname === "/api/validation/status") {
+  if (matchesPath(url.pathname, "/api/validation/status", "/api/v1/validation/status")) {
     const tradeDate = url.searchParams.get("tradeDate") || "2026-05-06";
     const frozen = readFreeze(tradeDate);
     sendJson(response, 200, {
@@ -133,7 +139,7 @@ const server = http.createServer(async (request, response) => {
     return;
   }
 
-  if (url.pathname === "/api/validation/freeze" && request.method === "POST") {
+  if (matchesPath(url.pathname, "/api/validation/freeze", "/api/v1/validation/freeze") && request.method === "POST") {
     const tradeDate = url.searchParams.get("tradeDate") || "2026-05-06";
     const body = await parseBody(request);
     const now = body.frozen_at || "2026-05-06T09:25:00+08:00";
@@ -150,7 +156,7 @@ const server = http.createServer(async (request, response) => {
     return;
   }
 
-  if (url.pathname === "/api/validation/backfill" && request.method === "POST") {
+  if (matchesPath(url.pathname, "/api/validation/backfill", "/api/v1/validation/backfill") && request.method === "POST") {
     const tradeDate = url.searchParams.get("tradeDate") || "2026-05-06";
     const body = await parseBody(request);
     if (!body.stage || !Array.isArray(body.items)) {
@@ -166,7 +172,7 @@ const server = http.createServer(async (request, response) => {
     return;
   }
 
-  if (url.pathname === "/api/validation/failure" && request.method === "POST") {
+  if (matchesPath(url.pathname, "/api/validation/failure", "/api/v1/validation/failure") && request.method === "POST") {
     const body = await parseBody(request);
     appendAudit({
       event: "snapshot_failure",
