@@ -1,0 +1,133 @@
+{
+  "trade_date": "2026-05-06",
+  "frozen_at": "2026-05-06T09:25:00+08:00",
+  "freeze_rule": "热题材 Top3 x 每题材核心股 Top5 候选池，再按 P_hit_3d_5pct 排序取 Top10",
+  "pool": [
+    {
+      "rank": 1,
+      "code": "300502",
+      "name": "新易盛",
+      "theme": "算力",
+      "p_hit_3d_5pct": 0.721,
+      "sample_size": 17,
+      "snapshot_time": "2026-05-06T09:25:00+08:00",
+      "model_version": "chaos-mvp-2026-05-03",
+      "calibration_version": "beta-binomial-v1",
+      "degraded": false
+    },
+    {
+      "rank": 2,
+      "code": "002085",
+      "name": "万丰奥威",
+      "theme": "低空经济",
+      "p_hit_3d_5pct": 0.6996,
+      "sample_size": 15,
+      "snapshot_time": "2026-05-06T09:25:00+08:00",
+      "model_version": "chaos-mvp-2026-05-03",
+      "calibration_version": "beta-binomial-v1",
+      "degraded": false
+    },
+    {
+      "rank": 3,
+      "code": "300607",
+      "name": "拓斯达",
+      "theme": "机器人",
+      "p_hit_3d_5pct": 0.697,
+      "sample_size": 16,
+      "snapshot_time": "2026-05-06T09:25:00+08:00",
+      "model_version": "chaos-mvp-2026-05-03",
+      "calibration_version": "beta-binomial-v1",
+      "degraded": false
+    },
+    {
+      "rank": 4,
+      "code": "000099",
+      "name": "中信海直",
+      "theme": "低空经济",
+      "p_hit_3d_5pct": 0.6932,
+      "sample_size": 15,
+      "snapshot_time": "2026-05-06T09:25:00+08:00",
+      "model_version": "chaos-mvp-2026-05-03",
+      "calibration_version": "beta-binomial-v1",
+      "degraded": false
+    },
+    {
+      "rank": 5,
+      "code": "002747",
+      "name": "埃斯顿",
+      "theme": "机器人",
+      "p_hit_3d_5pct": 0.6913,
+      "sample_size": 18,
+      "snapshot_time": "2026-05-06T09:25:00+08:00",
+      "model_version": "chaos-mvp-2026-05-03",
+      "calibration_version": "beta-binomial-v1",
+      "degraded": false
+    },
+    {
+      "rank": 6,
+      "code": "300124",
+      "name": "汇川技术",
+      "theme": "机器人",
+      "p_hit_3d_5pct": 0.6844,
+      "sample_size": 15,
+      "snapshot_time": "2026-05-06T09:25:00+08:00",
+      "model_version": "chaos-mvp-2026-05-03",
+      "calibration_version": "beta-binomial-v1",
+      "degraded": false
+    },
+    {
+      "rank": 7,
+      "code": "000977",
+      "name": "浪潮信息",
+      "theme": "算力",
+      "p_hit_3d_5pct": 0.6836,
+      "sample_size": 16,
+      "snapshot_time": "2026-05-06T09:25:00+08:00",
+      "model_version": "chaos-mvp-2026-05-03",
+      "calibration_version": "beta-binomial-v1",
+      "degraded": false
+    },
+    {
+      "rank": 8,
+      "code": "300308",
+      "name": "中际旭创",
+      "theme": "算力",
+      "p_hit_3d_5pct": 0.6784,
+      "sample_size": 12,
+      "snapshot_time": "2026-05-06T09:25:00+08:00",
+      "model_version": "chaos-mvp-2026-05-03",
+      "calibration_version": "beta-binomial-v1",
+      "degraded": false
+    },
+    {
+      "rank": 9,
+      "code": "002527",
+      "name": "新时达",
+      "theme": "机器人",
+      "p_hit_3d_5pct": 0.6404,
+      "sample_size": 14,
+      "snapshot_time": "2026-05-06T09:25:00+08:00",
+      "model_version": "chaos-mvp-2026-05-03",
+      "calibration_version": "beta-binomial-v1",
+      "degraded": false
+    },
+    {
+      "rank": 10,
+      "code": "300719",
+      "name": "安达维尔",
+      "theme": "低空经济",
+      "p_hit_3d_5pct": 0.6317,
+      "sample_size": 14,
+      "snapshot_time": "2026-05-06T09:25:00+08:00",
+      "model_version": "chaos-mvp-2026-05-03",
+      "calibration_version": "beta-binomial-v1",
+      "degraded": false
+    }
+  ],
+  "source_scope": "公开行情源仅用于内部 MVP 验证 / 演示，正式商用需切换授权源。",
+  "immutable_fields": [
+    "pool",
+    "frozen_at",
+    "freeze_rule"
+  ]
+}

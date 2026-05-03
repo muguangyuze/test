@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>混沌A股盈利模型</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body data-page="home">
+    <div class="shell">
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand-mark"></div>
+          <div class="brand-text">
+            <strong>混沌A股盈利模型</strong>
+            <span>情绪 + 相似度双因子</span>
+          </div>
+        </div>
+        <nav class="nav">
+          <a class="active" href="/">首页</a>
+          <a href="/analysis">核心分析</a>
+          <a href="/acceptance">实盘跟踪</a>
+          <a href="/">自选监控</a>
+          <a href="/">模型回测</a>
+          <a href="/">数据中心</a>
+          <a href="/">帮助中心</a>
+        </nav>
+        <div class="search">搜索股票 / 题材 / 指标</div>
+      </header>
+
+      <main class="page">
+        <section class="grid indices" id="indices"></section>
+
+        <section class="grid hero" style="margin-top:16px;">
+          <div class="card hero-main">
+            <div class="signal-card">
+              <div>
+                <div class="primary-label" id="hero-label"></div>
+                <h1 id="hero-stock"></h1>
+                <div class="muted" id="hero-sector"></div>
+                <div class="muted" style="margin-top:18px;">主概率</div>
+                <div class="big-probability" id="hero-probability"></div>
+                <div class="microcopy" id="hero-meta"></div>
+              </div>
+              <div>
+                <a class="button" href="/analysis?code=300308">查看核心分析页</a>
+                <p class="microcopy" id="hero-note"></p>
+              </div>
+            </div>
+            <div class="chart-box">
+              <div class="muted">日 K / 均线 / 成交量示意</div>
+              <div class="chart-line" id="hero-chart"></div>
+            </div>
+          </div>
+
+          <div class="side-stack">
+            <div class="card pad">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <strong>实时最热题材榜</strong>
+                <span class="muted">更多</span>
+              </div>
+              <table class="table" style="margin-top:8px;">
+                <thead>
+                  <tr class="muted">
+                    <th>排名</th>
+                    <th>题材</th>
+                    <th>热度值</th>
+                    <th>涨幅</th>
+                    <th>领涨股</th>
+                  </tr>
+                </thead>
+                <tbody id="themes-body"></tbody>
+              </table>
+            </div>
+
+            <div class="card pad">
+              <strong>核心联动个股</strong>
+              <div class="muted" style="margin:6px 0 14px;">围绕最热题材联动展示</div>
+              <div class="linked-stocks" id="linked-stocks"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="grid factor-panels" style="margin-top:16px;">
+          <div class="card pad factor-box">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+              <div>
+                <strong>模型原理：情绪因子</strong>
+                <div class="muted">反映市场短期情绪热度</div>
+              </div>
+              <div class="score-tile">
+                <span class="muted">当前情绪得分</span>
+                <strong id="factor-emotion"></strong>
+              </div>
+            </div>
+            <div class="bars" id="emotion-bars"></div>
+          </div>
+
+          <div class="card pad factor-box">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+              <div>
+                <strong>模型原理：相似度因子</strong>
+                <div class="muted">历史 K 线 / 成交量相似度</div>
+              </div>
+              <div class="score-tile">
+                <span class="muted">历史相似度得分</span>
+                <strong id="factor-similarity"></strong>
+              </div>
+            </div>
+            <div class="bars" id="similarity-bars"></div>
+          </div>
+        </section>
+
+        <section class="grid acceptance" style="margin-top:16px;">
+          <div class="card pad">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <strong>5月6日实盘测试状态</strong>
+              <a class="button" href="/acceptance">开始验证</a>
+            </div>
+            <div class="status-ring"></div>
+            <div style="text-align:center;color:#7ee787;font-size:32px;font-weight:800;">实时监控中</div>
+            <p class="microcopy" id="observation-note"></p>
+          </div>
+
+          <div class="card pad">
+            <strong>今日验证信号</strong>
+            <div class="metrics" id="acceptance-metrics" style="margin-top:14px;"></div>
+            <div class="footer-note" id="acceptance-checklist"></div>
+          </div>
+
+          <div class="card pad">
+            <strong>说明</strong>
+            <p class="microcopy">主概率统一解释为“未来 3 个交易日达到 +5% 收益目标的历史条件概率”。</p>
+            <p class="microcopy">2026-05-06 仅作为实验性 MVP 首个样本外观测日，不表示主模型验证已经完成。</p>
+            <p class="microcopy" id="source-note"></p>
+          </div>
+        </section>
+
+        <div class="footer-note">
+          重要公告：模型说明书已更新，样本外测试页保留冻结、回填与失败留痕记录；任何公开数据链路仅用于内部 MVP 验证 / 演示。
+        </div>
+      </main>
+    </div>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

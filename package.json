@@ -1,0 +1,10 @@
+{
+  "name": "ashare-profit-model-mvp",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node apps/api/server.js",
+    "test": "node --test apps/api/tests/*.test.js"
+  }
+}
