@@ -19,7 +19,7 @@
         <nav class="nav">
           <a href="/">首页</a>
           <a class="active" href="/analysis">核心分析页</a>
-          <a href="/acceptance">实盘测试</a>
+          <a href="/acceptance">样本外观测</a>
         </nav>
         <div class="search">搜索股票/代码/概念</div>
       </header>
@@ -36,7 +36,7 @@
             <a href="/">因子库</a>
             <a href="/">策略组合</a>
             <a href="/">回测中心</a>
-            <a href="/acceptance">实盘测试</a>
+            <a href="/acceptance">样本外观测</a>
           </aside>
 
           <div class="grid" style="gap:16px;">
@@ -52,7 +52,7 @@
                 <div class="gauge"><strong id="analysis-probability"></strong></div>
               </div>
               <div>
-                <div class="scenario">建议观察区间：2026-05-06 至 2026-05-08</div>
+                <div class="scenario">收益观察窗口：2026-05-07 至 2026-05-11</div>
                 <div id="scenarios"></div>
                 <p class="microcopy" id="analysis-note"></p>
               </div>
@@ -100,9 +100,9 @@
 
           <aside class="card pad right-status">
             <div class="section">
-              <strong>5月6日实盘测试状态</strong>
+              <strong>5月6日样本外观测状态</strong>
               <div class="status-ring"></div>
-              <div style="font-size:28px;color:#7ee787;font-weight:800;">实时监控中</div>
+              <div style="font-size:28px;color:#f59e0b;font-weight:800;">首个样本外观测未结算</div>
               <div class="microcopy">首个样本外观测日，仅验证冻结、展示、回填链路。</div>
             </div>
             <div class="section">
@@ -116,11 +116,12 @@
               </div>
             </div>
             <div class="section">
-              <strong>实盘表现</strong>
+              <strong>观测状态</strong>
               <div class="footer-note">
-                累计收益 +3.42%
-                <br />最大回撤 -1.28%
-                <br />胜率 87.5%
+                2026-05-06 09:25 冻结样本池
+                <br />2026-05-06 15:00 待回填首日路径
+                <br />2026-05-07 15:00 待回填 T+1 中间结果
+                <br />2026-05-11 15:00 待回填 T+3 最终结算
               </div>
             </div>
           </aside>
